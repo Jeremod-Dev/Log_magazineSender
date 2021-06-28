@@ -18,7 +18,7 @@ class Application:
         self.homePageZone = Frame(self.fenetre, background=const.FOND,width=const.ECRAN_X, height=const.ECRAN_Y)
         self.lbSend = ttk.Label(self.homePageZone, text="LOG_MAGAZINE",foreground=const.MAJENTA,background=const.FOND, font=self.fontTitre)
         self.eMdp = Entry(self.homePageZone, show="*")
-        self.ErreurMdp = ttk.Label(self.homePageZone, text="Mot de passe incorrect", foreground="red", background=const.FOND)
+        self.ErreurMdp = ttk.Label(self.homePageZone, foreground="red", background=const.FOND)
     
         # Page de template
         self.fontTitre = ("Arial",30,"bold")
@@ -29,8 +29,10 @@ class Application:
 
     def verificationMdp(self):
         if (enginer.verificationMdp(self.eMdp.get())>=0):
+            self.ErreurMdp.config(text="")
             self.createurPage()
         else:
+            self.ErreurMdp.config(text="Mot de passe incorrect")
             self.ErreurMdp.place(x=const.ECRAN_X/2-50, y=220)
 
     def homePage(self):
