@@ -60,12 +60,17 @@ class Application:
         
     def previsualiser(self):
         try:
-            if self.path!="":
-                os.system(self.path+" google")
+            if self.path=="":
+                print("Fichier inconnu")
+            elif self.lienPDF=="":
+                print("URL inconnue")
             else:
-                print("Fichier introuvable")
-        except OSError:
-            print("Prévisualisation impossible")
+                lien = self.lienPDF.get()
+                text = self.corpsMail.get("1.0", END)
+                enginer.generatorTemplate(self.path, lien, text)
+                os.system("4050af11e3cede12a7c250b5f50fcd1c.html google")
+        except Exception  as e:
+            print("Previsualisation impossible: ", e)
 
     def createurPage(self):
         self.createurPageZone.place(x=0,y=0)
@@ -77,13 +82,13 @@ class Application:
         btnTemplate.place(x=const.ECRAN_X/2-80 ,y=165)
         self.lbPathTemplate.place(x=const.ECRAN_X/2-120, y=195)
 
-        lienPDF = Entry(self.createurPageZone, width=75, font=self.fontClassique)
-        lienPDF.insert(0, "URL PDF")
-        lienPDF.place(x=const.ECRAN_X/4+50, y=225)
+        self.lienPDF = Entry(self.createurPageZone, width=75, font=self.fontClassique)
+        self.lienPDF.insert(0, "URL PDF")
+        self.lienPDF.place(x=const.ECRAN_X/4+50, y=225)
 
-        corpsMail = ScrolledText(self.createurPageZone, width=75, height=10, bg="white", font=self.fontClassique)
-        corpsMail.insert(END, "Corps du template")
-        corpsMail.place(x=const.ECRAN_X/4+50, y=255)
+        self.corpsMail = ScrolledText(self.createurPageZone, width=75, height=10, bg="white", font=self.fontClassique)
+        self.corpsMail.insert(END, "Corps du template")
+        self.corpsMail.place(x=const.ECRAN_X/4+50, y=255)
 
         btnPrevisualiser = Button(self.createurPageZone, text="Prévisualiser", background="white",foreground=const.MAJENTA, command=self.previsualiser, font=self.fontClassique)
         btnPrevisualiser.place(x=const.ECRAN_X/4, y=630)
