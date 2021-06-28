@@ -31,6 +31,11 @@ class Application:
         self.path = str()
         self.lbUtilisateur = ttk.Label(self.createurPageZone)
 
+        # Page de Envoi de mail
+        self.mailZone = Frame(self.fenetre, background=const.FOND,width=const.ECRAN_X, height=const.ECRAN_Y)
+        self.lbLogMagazineMail = ttk.Label(self.mailZone, text="LOG_MAGAZINE",foreground=const.MAJENTA,background=const.FOND, font=self.fontTitre)
+        self.lbUtilisateurMail = ttk.Label(self.mailZone)
+
     def verificationMdp(self):
         if (self.verificationExistenceMdp()):
             self.ErreurMdp.config(text="")
@@ -74,7 +79,7 @@ class Application:
 
     def createurPage(self):
         self.createurPageZone.place(x=0,y=0)
-        self.lbUtilisateur.config(text="Bonjour "+ enginer.getNameById(self.idUser)+",", font=self.fontClassique, background=const.FOND)
+        self.lbUtilisateur.config(text="Bonjour "+ enginer.getNameById(self.idUser), font=self.fontClassique, background=const.FOND)
         self.lbUtilisateur.place(x=10, y=10)
         self.lbLogMagazineCreateur.place(x=const.ECRAN_X/2-140, y=90)
 
@@ -90,13 +95,37 @@ class Application:
         self.corpsMail.insert(END, "Corps du template")
         self.corpsMail.place(x=const.ECRAN_X/4+50, y=255)
 
-        btnPrevisualiser = Button(self.createurPageZone, text="Prévisualiser", background="white",foreground=const.MAJENTA, command=self.previsualiser, font=self.fontClassique)
+        btnPrevisualiser = Button(self.createurPageZone, text="Valider & Prévisualiser", background="white",foreground=const.MAJENTA, command=self.previsualiser, font=self.fontClassique)
         btnPrevisualiser.place(x=const.ECRAN_X/4, y=630)
-        btnSuivant = Button(self.createurPageZone, background="white", text="Suivant",foreground=const.MAJENTA, font=self.fontClassique)
+        btnSuivant = Button(self.createurPageZone, background="white", text="Suivant",foreground=const.MAJENTA, font=self.fontClassique, command=self.mailPage)
         btnSuivant.place(x=const.ECRAN_X/4*3, y=630)
 
     def mailPage(self):
-        pass
+        self.mailZone.place(x=0,y=0)
+        self.lbUtilisateurMail.config(text="Bonjour "+ enginer.getNameById(self.idUser), font=self.fontClassique, background=const.FOND)
+        self.lbUtilisateurMail.place(x=10, y=10)
+        self.lbLogMagazineMail.place(x=const.ECRAN_X/2-140, y=90)
+
+        lbExpediteur = ttk.Label(self.mailZone, text="Expediteur", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
+        lbExpediteur.place(x=const.ECRAN_X/4, y=150)
+        eExpediteur = Entry(self.mailZone, width=75, font=self.fontClassique)
+        eExpediteur.place(x=const.ECRAN_X/4+85, y=150)
+
+        lbDestinataire = ttk.Label(self.mailZone, text="Destinataire", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
+        lbDestinataire.place(x=const.ECRAN_X/4, y=175)
+        eDestinataire = Entry(self.mailZone, width=75, font=self.fontClassique)
+        eDestinataire.place(x=const.ECRAN_X/4+85, y=175)
+
+        lbObjet = ttk.Label(self.mailZone, text="Objet", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
+        lbObjet.place(x=const.ECRAN_X/4, y=200)
+        eObjet = Entry(self.mailZone, width=75, font=self.fontClassique)
+        eObjet.place(x=const.ECRAN_X/4+85, y=200)
+
+        btnPrecedent = Button(self.mailZone, text="Précédent", background="white",foreground=const.MAJENTA, font=self.fontClassique, command=self.createurPage)
+        btnPrecedent.place(x=const.ECRAN_X/2-250, y=290)
+
+        btnEnvoyer = Button(self.mailZone, background="white", text="Envoyer",foreground=const.MAJENTA, font=self.fontClassique)
+        btnEnvoyer.place(x=const.ECRAN_X/2+250, y=290)
 
 if __name__ == '__main__':
     app = Application()
