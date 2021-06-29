@@ -1,8 +1,6 @@
 import hashlib
 import sqlite3
-from sqlite3.dbapi2 import Cursor
 from tkinter import filedialog
-import time
 
 
 
@@ -21,12 +19,10 @@ def requeteSQL(requete):
 def getId(saisi):
     saisiEncoder = hashlib.md5(saisi.encode())
     requete = "Select id from User where mdp = '"+ str(saisiEncoder.hexdigest())+"'"
-    # print(requete)
     return requeteSQL(requete)
 
 def getTemplatePath(): 
     filename = filedialog.askopenfilename(initialdir = ".",title = "Selectionnez votre template template",filetypes = [("Log_Magazine Template", "*.html")]) 
-    # print(filename)
     return filename
 
 def getNameById(id):
@@ -41,6 +37,13 @@ def generatorTemplate(fichier, url, text):
     for line in lines:
         chaine += line
     chaineCompleter = chaine.format(url, text)
-    # print(chaineCompleter)
     with open("4050af11e3cede12a7c250b5f50fcd1c.html", encoding='utf-8', mode='w') as fic2:
         fic2.write(chaineCompleter)
+
+def getTemplate():
+    with open("4050af11e3cede12a7c250b5f50fcd1c.html", encoding='utf-8', mode='r') as fic2:
+        lines = fic2.readlines()
+        chaine = ""
+        for line in lines:
+            chaine += line
+        return chaine
