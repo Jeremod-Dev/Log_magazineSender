@@ -47,3 +47,16 @@ def getTemplate():
         for line in lines:
             chaine += line
         return chaine
+
+def setModificationMdp(id, ancien, nouveau):
+    ancienEncoder = hashlib.md5(ancien.encode())
+    nouveauEncoder = hashlib.md5(nouveau.encode())
+    if(requeteSQL("select name from user where id="+id)!=""):
+        if (requeteSQL("select mdp from user where id=1"==ancienEncoder.hexdigest())):
+            req = "UPDATE user SET mdp='"+nouveauEncoder.hexdigest()+"' WHERE id="+str(id)
+            print(req)
+            requeteSQL(req)
+        else:
+            print("ancien mdp incorrect")
+    else:
+        print("id incorrect")

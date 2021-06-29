@@ -5,6 +5,7 @@ import os
 import constante as const
 import enginer
 import pyperclip
+import time
 
 class Application:
     def __init__(self):
@@ -55,31 +56,29 @@ class Application:
         btnValider.place(x=542 ,y=372)
         btnVersion = Button(self.homePageZone, text=const.SOUSTITRE+" - "+const.VERSION,foreground=const.MAJENTA, background=const.FOND, width=25,relief=FLAT, command=self.detailApp)
         btnVersion.place(x=10 ,y=const.ECRAN_Y-30)
+        
 
         self.fenetre.mainloop()
-        
+
     def getTemplate(self):
         self.path = str(enginer.getTemplatePath())
         self.lbPathTemplate.config(text=self.path)
 
     def detailApp(self):
-        print("details en cours...")
         fen = Toplevel()
         fen.geometry("300x250+250+250")
         fen.title("Détails application")
         lbinfo = ttk.Label(fen,text="Ce logiciel a été développé à des fins \nnon commerciale et offert au Log_Magazine. \n \nTous droits réservés (c) - Jérémy DRON \n version courante: "+const.VERSION+"\n\nlien vers le projet: \nhttps://github.com/Jeremod-Dev/Log_magazineSender")
         lbinfo.pack()
-        
+
     def previsualiser(self):
         try:
             if self.path=="":
                 self.ErreurTemplate.config(text="Veuillez renseigner un template")
                 self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
-                print("Fichier inconnu")
             elif self.lienPDF.get()=="URL PDF":
                 self.ErreurTemplate.config(text="Veuillez renseigner un URL")
                 self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
-                print("URL inconnue")
             else:
                 self.ErreurTemplate.config(text="")
                 lien = self.lienPDF.get()
@@ -87,13 +86,13 @@ class Application:
                 enginer.generatorTemplate(self.path, lien, text)
                 os.system("4050af11e3cede12a7c250b5f50fcd1c.html google")
         except Exception  as e:
-            print("Previsualisation impossible: ", e)
+            self.ErreurTemplate.config(text="Previsualisation impossible")
+            self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
 
     def createurPage(self):
-        print("test 1597")
         self.createurPageZone.place(x=0,y=0)
-        self.lbUtilisateur.config(text="Bonjour "+ enginer.getNameById(self.idUser), font=self.fontClassique, background=const.FOND)
-        self.lbUtilisateur.place(x=10, y=10)
+        self.lbUtilisateur.config(text="Connexion: "+enginer.getNameById(self.idUser)+" - "+str(time.strftime("%H:%M:%S")),foreground=const.MAJENTA, font=self.fontClassique, background=const.FOND)
+        self.lbUtilisateur.place(x=10, y=const.ECRAN_Y-25)
         self.lbLogMagazineCreateur.place(x=const.ECRAN_X/2-140, y=90)
 
         btnTemplate = Button(self.createurPageZone, text="Template", background="white",foreground=const.MAJENTA, width=25, command=self.getTemplate, font=self.fontClassique)
