@@ -1,10 +1,10 @@
-from PIL import Image, ImageTk
 from tkinter import *
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
 import os
 import constante as const
 import enginer
+import pyperclip
 
 class Application:
     def __init__(self):
@@ -30,11 +30,7 @@ class Application:
         self.lbPathTemplate = ttk.Label(self.createurPageZone,foreground=const.MAJENTA,background=const.FOND)
         self.path = str()
         self.lbUtilisateur = ttk.Label(self.createurPageZone)
-
-        # Page de Envoi de mail
-        self.mailZone = Frame(self.fenetre, background=const.FOND,width=const.ECRAN_X, height=const.ECRAN_Y)
-        self.lbLogMagazineMail = ttk.Label(self.mailZone, text="LOG_MAGAZINE",foreground=const.MAJENTA,background=const.FOND, font=self.fontTitre)
-        self.lbUtilisateurMail = ttk.Label(self.mailZone)
+        self.ErreurTemplate = ttk.Label(self.createurPageZone, foreground="red", background=const.FOND)
 
     def verificationMdp(self):
         if (self.verificationExistenceMdp()):
@@ -57,19 +53,35 @@ class Application:
         self.eMdp.config(font=self.fontClassique)
         btnValider = Button(self.homePageZone, text="Connexion",foreground=const.MAJENTA, background="white", width=25, command=self.verificationMdp)
         btnValider.place(x=542 ,y=372)
+        btnVersion = Button(self.homePageZone, text=const.SOUSTITRE+" - "+const.VERSION,foreground=const.MAJENTA, background=const.FOND, width=25,relief=FLAT, command=self.detailApp)
+        btnVersion.place(x=10 ,y=const.ECRAN_Y-30)
+
         self.fenetre.mainloop()
         
     def getTemplate(self):
         self.path = str(enginer.getTemplatePath())
         self.lbPathTemplate.config(text=self.path)
+
+    def detailApp(self):
+        print("details en cours...")
+        fen = Toplevel()
+        fen.geometry("300x250+250+250")
+        fen.title("Détails application")
+        lbinfo = ttk.Label(fen,text="Ce logiciel a été développé à des fins \nnon commerciale et offert au Log_Magazine. \n \nTous droits réservés (c) - Jérémy DRON \n version courante: "+const.VERSION+"\n\nlien vers le projet: \nhttps://github.com/Jeremod-Dev/Log_magazineSender")
+        lbinfo.pack()
         
     def previsualiser(self):
         try:
             if self.path=="":
+                self.ErreurTemplate.config(text="Veuillez renseigner un template")
+                self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
                 print("Fichier inconnu")
-            elif self.lienPDF=="":
+            elif self.lienPDF.get()=="URL PDF":
+                self.ErreurTemplate.config(text="Veuillez renseigner un URL")
+                self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
                 print("URL inconnue")
             else:
+                self.ErreurTemplate.config(text="")
                 lien = self.lienPDF.get()
                 text = self.corpsMail.get("1.0", END)
                 enginer.generatorTemplate(self.path, lien, text)
@@ -78,6 +90,7 @@ class Application:
             print("Previsualisation impossible: ", e)
 
     def createurPage(self):
+        print("test 1597")
         self.createurPageZone.place(x=0,y=0)
         self.lbUtilisateur.config(text="Bonjour "+ enginer.getNameById(self.idUser), font=self.fontClassique, background=const.FOND)
         self.lbUtilisateur.place(x=10, y=10)
@@ -96,36 +109,16 @@ class Application:
         self.corpsMail.place(x=const.ECRAN_X/4+50, y=255)
 
         btnPrevisualiser = Button(self.createurPageZone, text="Valider & Prévisualiser", background="white",foreground=const.MAJENTA, command=self.previsualiser, font=self.fontClassique)
-        btnPrevisualiser.place(x=const.ECRAN_X/4, y=630)
-        btnSuivant = Button(self.createurPageZone, background="white", text="Suivant",foreground=const.MAJENTA, font=self.fontClassique, command=self.mailPage)
-        btnSuivant.place(x=const.ECRAN_X/4*3, y=630)
+        btnPrevisualiser.place(x=const.ECRAN_X/4, y=450)
+        btnSuivant = Button(self.createurPageZone, background="white", text="Copier le code source dans le presse papier",foreground=const.MAJENTA, font=self.fontClassique, command=self.copieSource)
+        btnSuivant.place(x=const.ECRAN_X/3*2, y=450)
 
-    def mailPage(self):
-        self.mailZone.place(x=0,y=0)
-        self.lbUtilisateurMail.config(text="Bonjour "+ enginer.getNameById(self.idUser), font=self.fontClassique, background=const.FOND)
-        self.lbUtilisateurMail.place(x=10, y=10)
-        self.lbLogMagazineMail.place(x=const.ECRAN_X/2-140, y=90)
-
-        lbExpediteur = ttk.Label(self.mailZone, text="Expediteur", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
-        lbExpediteur.place(x=const.ECRAN_X/4, y=150)
-        eExpediteur = Entry(self.mailZone, width=75, font=self.fontClassique)
-        eExpediteur.place(x=const.ECRAN_X/4+85, y=150)
-
-        lbDestinataire = ttk.Label(self.mailZone, text="Destinataire", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
-        lbDestinataire.place(x=const.ECRAN_X/4, y=175)
-        eDestinataire = Entry(self.mailZone, width=75, font=self.fontClassique)
-        eDestinataire.place(x=const.ECRAN_X/4+85, y=175)
-
-        lbObjet = ttk.Label(self.mailZone, text="Objet", font=self.fontClassique, background=const.FOND, foreground=const.MAJENTA)
-        lbObjet.place(x=const.ECRAN_X/4, y=200)
-        eObjet = Entry(self.mailZone, width=75, font=self.fontClassique)
-        eObjet.place(x=const.ECRAN_X/4+85, y=200)
-
-        btnPrecedent = Button(self.mailZone, text="Précédent", background="white",foreground=const.MAJENTA, font=self.fontClassique, command=self.createurPage)
-        btnPrecedent.place(x=const.ECRAN_X/2-250, y=290)
-
-        btnEnvoyer = Button(self.mailZone, background="white", text="Envoyer",foreground=const.MAJENTA, font=self.fontClassique)
-        btnEnvoyer.place(x=const.ECRAN_X/2+250, y=290)
+    def copieSource(self):
+        try:
+            pyperclip.copy(enginer.getTemplate())
+        except:
+            self.ErreurTemplate.config(text="Erreur lors de la copie du code source")
+            self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
 
 if __name__ == '__main__':
     app = Application()
