@@ -7,3 +7,10 @@ Le Log_Magazine est un journal/magazine produit par des étudiants volontaire du
 
 ![Couverture du Log_Magazine de Mai 2021](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/Couverture.PNG)
 
+*Couverture du Log_Magazine de Mai 2021*
+
+## Contexte du projet
+
+Pour proposer à tous les étudiants et enseignants du département, l'éditrice du Log_Magazine, envoie un courriel sur une liste de diffusion chaque mois, avec un lien vers le site du Log_Magazine et le magazine au format PDF. En vue d'améliorer la communication externe du Log, certains membres de la rédaction, ont émis l'hypothèse d'insérer du XHTML dans le courriel afin d'obtenir un visuel plus attrayant.
+
+![Tempalte exemple de courriel de communication](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/Template.PNG)
