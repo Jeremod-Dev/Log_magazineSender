@@ -34,3 +34,5 @@ Seulement, pour faire ce rendu, il faut mettre la main au code, hors cela peut-�
 ![Page de création de courriel du logiciel](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/CreationPage.PNG)
 
 Dans cette première version, vous ne pouvez que récuperer dans votre presse papier le code source pour l'insérer par vous même dans un mail. Cette tache est également pas évidente à effectuer, par conséquent la prochaine version du logiciel incluera l'envoi de courriel.
+
+**Lors de l'utilisation de l'application veuillez NE JAMAIS renommer, déplacer ou modifier le fichier `4050af11e3cede12a7c250b5f50fcd1c.html`. Dans le cas contraire, le logiciel admettera un disfonctionnement.**
