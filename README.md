@@ -41,7 +41,7 @@ Dans cette première version, vous ne pouvez que récuperer dans votre presse pa
 
 ### Conditions générales:
 
-Vous devez générer un template qui a pour objectif d'être envoyé par courriel, dnas ce cas vous devez prendre en compte que les boites mail ne gere pas toutes les technologies [(Technologies supportées)](https://www.campaignmonitor.com/css/) :
+Vous devez générer un template qui a pour objectif d'être envoyé par courriel, dans ce cas vous devez prendre en compte que les boites mail ne gerent pas toutes les technologies [(Technologies supportées)](https://www.campaignmonitor.com/css/) :
 
 - Les langage XHTML + CSS  *ne pas en abuser*
 - Les images doivent être stocké dans un endroit accessible sur internet. Votre template lui fera référence.
@@ -50,6 +50,15 @@ Pour vous aider dans le developpement de votre template, je renvois vers le tuto
 
 ### Conditions liées aux générateurs:
 
-Le logiciel concidère que votre template est valide. Pour que votre template fonctionne correctement avec le logiciel vous devez respecter plusieurs conditions:
+Le logiciel concidère que votre template est valide. Pour que votre template fonctionne correctement avec le logiciel vous devez respecter plusieurs conditions **obligatoire**:
 
-- Vous devez avoir un bouton vers le PDF et un champs pour l'insertion du texte. Dans les deux cas mettez `{}`.
+- Un bouton vers le PDF. Pour le lien mettez `{}`.
+- Un champ de texte. Ce champ sera balisé avec `<pre>{}</pre>`. Veuillez faire attention que les accolades soient tangentes avec la balise ouvrante.
+- Votre template ne doit pas contenir de caractères spéciaux.
+
+![Exemple bouton](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/img1.PNG)
+
+*exemple pour le bouton*
+
+![Exemple bouton](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/img1.PNG)
+*exemple pour le texte*
