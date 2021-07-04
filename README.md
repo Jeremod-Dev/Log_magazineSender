@@ -54,11 +54,13 @@ Le logiciel concidère que votre template est valide. Pour que votre template fo
 
 - Un bouton vers le PDF. Pour le lien mettez `{}`.
 - Un champ de texte. Ce champ sera balisé avec `<pre>{}</pre>`. Veuillez faire attention que les accolades soient tangentes avec la balise ouvrante.
+- Le **bouton** doit être placé avant **la zone de texte**.
 - Votre template ne doit pas contenir de caractères spéciaux.
 
 ![Exemple bouton](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/img1.PNG)
 
 *exemple pour le bouton*
 
-![Exemple bouton](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/img1.PNG)
+![Exemple bouton](https://github.com/Jeremod-Dev/Log_magazineSender/blob/main/image/img2.PNG)
+
 *exemple pour le texte*
