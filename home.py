@@ -56,7 +56,6 @@ class Application:
         btnValider.place(x=542 ,y=372)
         btnVersion = Button(self.homePageZone, text=const.SOUSTITRE+" - "+const.VERSION,foreground=const.MAJENTA, background=const.FOND, width=25,relief=FLAT, command=self.detailApp)
         btnVersion.place(x=10 ,y=const.ECRAN_Y-30)
-        
 
         self.fenetre.mainloop()
 
@@ -85,7 +84,7 @@ class Application:
                 text = self.corpsMail.get("1.0", END)
                 enginer.generatorTemplate(self.path, lien, text)
                 os.system("4050af11e3cede12a7c250b5f50fcd1c.html google")
-        except Exception  as e:
+        except:
             self.ErreurTemplate.config(text="Previsualisation impossible")
             self.ErreurTemplate.place(x=const.ECRAN_X/2-50, y=450)
 
