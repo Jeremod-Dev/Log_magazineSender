@@ -36,3 +36,20 @@ Seulement, pour faire ce rendu, il faut mettre la main au code, hors cela peut-�
 Dans cette première version, vous ne pouvez que récuperer dans votre presse papier le code source pour l'insérer par vous même dans un mail. Cette tache est également pas évidente à effectuer, par conséquent la prochaine version du logiciel incluera l'envoi de courriel.
 
 **Lors de l'utilisation de l'application veuillez NE JAMAIS renommer, déplacer ou modifier le fichier `4050af11e3cede12a7c250b5f50fcd1c.html`. Dans le cas contraire, le logiciel admettera un disfonctionnement.**
+
+## Comment générer un template valide ?
+
+### Conditions générales:
+
+Vous devez générer un template qui a pour objectif d'être envoyé par courriel, dnas ce cas vous devez prendre en compte que les boites mail ne gere pas toutes les technologies [(Technologies supportées)](https://www.campaignmonitor.com/css/) :
+
+- Les langage XHTML + CSS  *ne pas en abuser*
+- Les images doivent être stocké dans un endroit accessible sur internet. Votre template lui fera référence.
+
+Pour vous aider dans le developpement de votre template, je renvois vers le tutoriel de [Grafikart.fr](https://www.youtube.com/watch?v=xeNjM3miO7k). Pour créer un bouton cliquable vous pouvez utiliser ce [générateur](https://buttons.cm/).
+
+### Conditions liées aux générateurs:
+
+Le logiciel concidère que votre template est valide. Pour que votre template fonctionne correctement avec le logiciel vous devez respecter plusieurs conditions:
+
+- Vous devez avoir un bouton vers le PDF et un champs pour l'insertion du texte. Dans les deux cas mettez `{}`.
